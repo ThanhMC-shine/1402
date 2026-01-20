@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Valentine</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 30px 0;
+        font-size: 42px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      section {
+        width: 90%;
+        max-width: 1100px;
+        margin: 30px auto;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ===== THƯỚC PHIM ===== */
+      .film-container {
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+
+      .film-track {
+        display: flex;
+        gap: 15px;
+      }
+
+      .film-item img {
+        height: 180px;
+        border-radius: 14px;
+        border: 3px solid rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .film-item img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      /* ===== POPUP ===== */
+      .popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup-content {
+        background: white;
+        color: #333;
+        padding: 25px;
+        border-radius: 16px;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .popup-content button {
+        margin-top: 15px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 25px;
+        background: #ff758c;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      /* ===== VÒNG QUAY ===== */
+      .input-area {
+        text-align: center;
+      }
+
+      input {
+        width: 70%;
+        max-width: 400px;
+        padding: 12px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+      }
+
+      .list {
+        margin-top: 15px;
+      }
+
+      .item {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 6px 14px;
+        border-radius: 20px;
+        margin: 5px;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 25px;
+        background: #ffdde1;
+        color: #c0392b;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      /* ===== NHẬT KÝ ===== */
+      textarea {
+        width: 100%;
+        height: 160px;
+        border-radius: 12px;
+        border: none;
+        padding: 15px;
+        font-size: 16px;
+        resize: none;
+        background: rgba(255, 255, 255, 0.85);
+        color: #333;
+        font-family: "Courier New", monospace;
+      }
+
+      /* ===== TIM RƠI ===== */
+      .heart {
+        position: fixed;
+        top: -10px;
+        font-size: 20px;
+        animation: fall 6s linear infinite;
+        opacity: 0.8;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh);
+        }
+      }
+      .result.spin {
+        animation: pulse 0.4s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.15);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .popup-content img {
+        width: 100%;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 14px;
+        margin-bottom: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .popup-content p {
+        font-size: 17px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>💔 Kỷ niệm một năm bị từ chối 💔</h1>
+
+    <!-- ===== THƯỚC PHIM ===== -->
+    <section>
+      <h2>🎞️ Thước phim kỷ niệm</h2>
+
+      <div class="film-container">
+        <div class="film-track">
+          <div class="film-item">
+            <img
+              src="./img/0.webp"
+              data-text="Lần đầu Thanh locket Như nè. Đoán trước Như hong nhớ được ý nghĩa Thanh đưa tấm này hehe"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/1.jpg"
+              data-text="Tấm này là lần đầu 2 đứa mình chụp hình chung với nhau luôn á. Ngạc nhiên liền"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/2.jpg"
+              data-text="Tầm này là hội diễn liên chi nè. Thanh nhớ Như rủ Thanh qua ngồi chung vui vãi hehe"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/3.jpg"
+              data-text="Lén lúc ik coi pháo hoa chung nè, mẹ trẻ giữ 2 đứa trẻ há"
+            />rer
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/5.jpg"
+              data-text="Này nhìn biết liền chứ gì, ngày đầu tiên bị từ chối - Valentine đầu tiên hehe, Thanh tặng Như j ta, chót chét lại hôm đó nghe coi"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/4,2.jpg"
+              data-text="Này là mình ik thả diều á, kể nhâu nghe nhưng chuyện hồi xưa đồ đó, nyc đồ đó mà clm h quên hết r sao Như chắc kệ hé h Như là của Thanh luôn rồi mơ mà thằng này thả nhá, tấm này còn quay top top nắm quần nữa á."
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/4,3.jpg"
+              data-text="Này chắc là nhìn cái Như biết liền chứ gì, Thanh tặng Như vòng hui nhân ngày gì ta chết mẹ Thanh quên r Như đố Như nhớ á. khúc này tức giận thì hun Thanh 1 cái mình hòa hehe"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/4,4.jpg"
+              data-text="Tặng qua bằng hình thức nộp kế hoạch nè, ủa hong phải tặng mà bù cho cái cũ bị rỉ haiz, mà nhớ lại quê tr, đố bt Thanh quê j :))"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/7.jpg"
+              data-text="Uk này chỉ đơn giản là hư xe r kêu 3 lợi cíu hui, có deeptalk với nhâu nz mà nói gì ta hong nhớ ta"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/6.jpg"
+              data-text="aaaaaaaaaaaaaaaaa lần đầu tiên chở bé đẹp ik hà tiên nè, tuy nhiền biến cố nhưng có quả ngọt mà, ê vui lắm á kiểu lm đc cái gì lớn lao cho bé đẹp dị á"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/10.jpg"
+              data-text="này chắc nhìn lại cay chứ gì, cay thì bị hun 1 cái. Này làm bé nhà ghen tím người nè, giận lắm đó à nha. mà vẫn thua người nông dân mưu hèn kế bẩn thoi, đơn giản"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/8.jpg"
+              data-text="quao bánh kem j đây ta. ngày tỏ tình chính thức quen nhâu chứ j ta. có muốn nói gì ở đây hong ta"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/11.jpg"
+              data-text="này đơn giản đi nhảy cà te cà te với nhau thôi"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/9.jpg"
+              data-text="afdjlfsdfsvdaf lần đầu, lần đầu, lần đâu, lần đầu chụp photobooth"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/12.jpg"
+              data-text="chết mẹ gặp lần đầu nz rồi, lần đầu chơi chung với nhau nè"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/13.jpg"
+              data-text="tấm này là chết Như rồi siêu thử thách ở đây, vua trí tuệ ai thông minh hơn học sinh lớp 5. Tấm này mình ik đâu ? ------------- mình có hứa hẹn gì ở đây ? ----------------- mình ... gì với nhau ? - không trả lời đc thì biết làm gì r đó hong bt thì để chỉ hêhe"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/14.jpg"
+              data-text="nếu trả lời đc hun 1 cái kkk sao mà ngờ, ik biển lần 2 nè, r kể ik Thanh nghe biết thấy tấm này là mắc chót chét lắm r chứ j"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/15.jpg"
+              data-text="này ik múa cùng nhâu nè, mức độ vui 99%"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/17.jpg"
+              data-text="hỏi 1% còn lại ở tấm trước đâu hả, nếu có đồng ý đi 26 hong thì hun 1 cái clm tự thấy đúng cáo già kkk. ủa quên tắm này là quà 20/10 của Như nè, lần đầu đó Như lần đầu ở đây ý Thanh là gì ?. hong bt thì phạt Như cũ."
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/19.jpg"
+              data-text="tâm sự nhiều chuyện với nhâu nè, tuy hong vui mà buồn"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/18.jpg"
+              data-text="tâm sự lần lần tiếp theo quán cũng oki, tuy buồn mà cũng hong vui"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/20.jpg"
+              data-text="Cỏ ngọt nè, lần đầu tiên đi chấm lm quán quen lun"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/21.jpg"
+              data-text="chạy deadline cùng nhâu lần 3 nè Như, hỏi lần 1,2 hả hình Như hong có hình chung huhu"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/22.jpg"
+              data-text="này là ik coi zootopia với ik sea coffee quay top top bị ngta nhìn ư"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/23.jpg"
+              data-text="này là ik eco resort với nhâu nè. điều Như hấy vui nhất ngày hơm đó coi"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/24.jpg"
+              data-text="aaaadfdasdfsd sinh nhật bất ngờ cho Như nè, muốn bt Như ước j quá ta"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/25.jpg"
+              data-text="Khỏi phải bàn clm, đi biển lần đầu tiên thấy đẹp dị lun á, thành công hơn hơn mong đợi"
+            />
+          </div>
+          <div class="film-item">
+            <img src="./img/26.jpg" data-text="Tổng kết cuối năm" />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/28.jpg"
+              data-text="ik coi phim tết của Thu Trang nè"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/27.jpg"
+              data-text="photobooth lần 2 nè, này chụp oki á, thít thíc thích á"
+            />
+          </div>
+          <div class="film-item">
+            <img
+              src="./img/29.jpg"
+              data-text="cà phê ông quan lần 2, sở thú aaaaaaaa"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPUP -->
+    <div class="popup" id="popup">
+      <div class="popup-content">
+        <img id="popupImg" src="" alt="" />
+        <p id="popupText"></p>
+        <button id="closeBtn">OK</button>
+      </div>
+    </div>
+
+    <!-- ===== VÒNG QUAY ===== -->
+    <section>
+      <h2>🎁 Ghi điều ước và tiên sẽ ban cho con</h2>
+
+      <div class="input-area">
+        <input id="giftInput" placeholder="Nhập nội dung rồi nhấn Enter" />
+        <div class="list" id="giftList"></div>
+        <button id="spinBtn">Quay</button>
+        <div class="result" id="result"></div>
+      </div>
+    </section>
+
+    <!-- ===== NHẬT KÝ ===== -->
+    <section>
+      <h2>📖 Valentine</h2>
+      <p style="text-align: center">
+        Chào Như heo nhá, nay hong phải là Valentine mà tổ chức trước ó, bữa đó
+        hăm gặp nhau đc buồn lun phải gặp cho ik 26 lun rồi kkk, thì Valentine
+        Thanh chỉ muốn nói với Như là Thanh thương Như nhiều nhiều lắm á, Thanh
+        muốn lúc nào cũng được là người yêu thương Như lắng nghe Như, đặt biệt
+        là được bên cạnh Như. Chúng ta không hoàn hảo, tình yêu cũng không hoàn
+        hảo nhưng Thanh sẽ yêu thương Như một cách hoàn hảo nhất. Chúc cho chúng
+        ta lúc nào cũng bên nhau thương nhau nhiều hơn nha, hẹn Valentine năm
+        sao hehe.
+      </p>
+    </section>
+
+    <script>
+      /* ===== THƯỚC PHIM ===== */
+      const popup = document.getElementById("popup");
+      const popupText = document.getElementById("popupText");
+      const closeBtn = document.getElementById("closeBtn");
+      let selectedItem = null;
+
+      const popupImg = document.getElementById("popupImg");
+
+      document.querySelectorAll(".film-item img").forEach((img) => {
+        img.onclick = () => {
+          selectedItem = img.parentElement;
+          popupImg.src = img.src; // ảnh phía trên
+          popupText.innerText = img.dataset.text; // nội dung phía dưới
+          popup.style.display = "flex";
+        };
+      });
+
+      closeBtn.onclick = () => {
+        popup.style.display = "none";
+        if (selectedItem) {
+          selectedItem.remove(); // xoá đúng tấm ảnh đã click
+          selectedItem = null;
+        }
+      };
+
+      /* ===== VÒNG QUAY ===== */
+      const gifts = [];
+      const input = document.getElementById("giftInput");
+      const list = document.getElementById("giftList");
+      const result = document.getElementById("result");
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && input.value.trim()) {
+          gifts.push(input.value.trim());
+          const span = document.createElement("span");
+          span.className = "item";
+          span.innerText = input.value;
+          list.appendChild(span);
+          input.value = "";
+        }
+      });
+
+      document.getElementById("spinBtn").onclick = () => {
+        if (gifts.length === 0) {
+          result.innerText = "Chưa có gì để quay 😢";
+          return;
+        }
+
+        let count = 0;
+        let maxRound = 25 + Math.floor(Math.random() * 10); // số lần nhảy
+        let speed = 80; // tốc độ ban đầu (ms)
+
+        result.classList.add("spin");
+
+        const spinner = setInterval(() => {
+          const randomIndex = Math.floor(Math.random() * gifts.length);
+          result.innerText = "🎲 Đang chọn: " + gifts[randomIndex];
+          count++;
+
+          // làm chậm dần
+          speed += 20;
+
+          if (count >= maxRound) {
+            clearInterval(spinner);
+            result.classList.remove("spin");
+
+            // kết quả cuối
+            setTimeout(() => {
+              result.innerText = "🎉 Điều ước được chọn: " + gifts[randomIndex];
+            }, 300);
+          }
+        }, speed);
+      };
+
+      /* ===== TIM RƠI ===== */
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    </script>
+  </body>
+</html>
